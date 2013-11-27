@@ -1,0 +1,51 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    color: #222;
+    font-size: 16pt;
+    line-height: 1.7;
+}
+
+a {
+    color: steelblue;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    width: 700px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin: 40px 0;
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 36pt;
+    line-height: 1em;
+    margin: 0;
+    padding: 0;
+}
+
+h1 strong {
+    font-weight: bold;
+}
+
+h1 small {
+    font-size: 32pt;
+    color: #333;
+    font-weight: 200;
+}
+
+h2 {
+    font-weight: bold;
+    font-size: 21pt;
+    line-height: 1em;
+    margin: 40px 0 0;
+    padding: 0;
+}

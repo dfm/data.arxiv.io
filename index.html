@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <title></title>
+
+    <link rel="stylesheet" href="assets/normalize.css" type="text/css" />
+    <link rel="stylesheet" href="assets/data.arxiv.css" type="text/css" />
+
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1><strong>data</strong><small>.arxiv.io</small></h1>
+        </header>
+
+        <p>
+        This site is a repository for a dataset containing public metadata about
+        abstracts listed on <a href="http://arxiv.org">arxiv.org</a> coerced into
+        a form suitable for projects in <i>natural language processing</i>.
+        </p>
+
+        <h2>Data Format &amp; Access</h2>
+
+        <p>
+        The data are saved in gzipped tab-separated ASCII files.
+        Each abstract is a single line with the columns: <i>ArXiv ID</i>,
+        <i>space-separated categories</i>, <i>tokenized title</i>, and
+        <i>tokenized abstract</i>.
+        The title and abstract have been tokenized using the
+        <a href="http://nltk.org/">NLTK</a> implementation of the
+        <a href="http://nltk.org/api/nltk.tokenize.html#module-nltk.tokenize.treebank">Penn Treebank tokenizer</a>.
+        </p>
+
+        <p>
+        The files are available in the <a href="data">/data</a> directory with
+        URLs of the form <strong>/data/{category}/{year}-{month}-{day}.txt.gz</strong>.
+        For example, all of the abstracts listed in the <strong>astro-ph</strong>
+        category on <strong>August 6, 2007</strong> are in the file
+        <a href="data/astro-ph/2007-08-06.txt.gz">/data/astro-ph/2007-08-06.txt.gz</a>.
+        </p>
+    </div>
+
+</body>
+</html>
