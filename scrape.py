@@ -13,6 +13,7 @@ __all__ = ["download"]
 import os
 import re
 import time
+import gzip
 import logging
 import requests
 import xml.etree.cElementTree as ET
@@ -90,17 +91,18 @@ def parse(xml_data):
     results = []
     for i, r in enumerate(tree.findall(record_tag)):
         arxiv_id = r.find(format_tag("id")).text
+        date = r.find(format_tag("created")).text
         title = r.find(format_tag("title")).text
         abstract = r.find(format_tag("abstract")).text
         categories = r.find(format_tag("categories")).text
-        results.append((arxiv_id, title, abstract, categories))
+        results.append((arxiv_id, date, title, abstract, categories))
     return results
 
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
-    bp = "dataset"
+    bp = "data"
     try:
         os.makedirs(bp)
     except os.error:
@@ -109,18 +111,15 @@ if __name__ == "__main__":
     file_ids = defaultdict(int)
     counts = defaultdict(int)
     for data in download():
-        for arxiv_id, title, abstract, categories in data:
-            c = categories.split()[0].split(".")[0]
-            path = os.path.join(bp, c.replace("/", "-"))
+        for arxiv_id, date, title, abstract, categories in data:
+            c = categories.split()[0].split(".")[0].replace("/", "-")
+            path = os.path.join(bp, c)
             try:
                 os.makedirs(path)
             except os.error:
                 pass
-            counts[c] += 1
-            if counts[c] % 1000 == 0:
-                file_ids[c] += 1
-            fid = file_ids[c]
-            with open(os.path.join(path, "{0:08}.txt".format(fid)), "a") as f:
+            with gzip.open(os.path.join(path, "{0}.txt.gz".format(date)),
+                           "a") as f:
                 f.write("\t".join([
                     arxiv_id,
                     categories,
