@@ -90,12 +90,16 @@ def parse(xml_data):
     tree = ET.fromstring(xml_data)
     results = []
     for i, r in enumerate(tree.findall(record_tag)):
-        arxiv_id = r.find(format_tag("id")).text
-        date = r.find(format_tag("created")).text
-        title = r.find(format_tag("title")).text
-        abstract = r.find(format_tag("abstract")).text
-        categories = r.find(format_tag("categories")).text
-        results.append((arxiv_id, date, title, abstract, categories))
+        try:
+            arxiv_id = r.find(format_tag("id")).text
+            date = r.find(format_tag("created")).text
+            title = r.find(format_tag("title")).text
+            abstract = r.find(format_tag("abstract")).text
+            categories = r.find(format_tag("categories")).text
+        except:
+            logging.error("Parsing of record failed:\n{0}".format(r))
+        else:
+            results.append((arxiv_id, date, title, abstract, categories))
     return results
 
 
